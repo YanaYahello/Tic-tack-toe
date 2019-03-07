@@ -1,0 +1,47 @@
+
+$primary-color: #8F04A8;
+$secondary-color-A: #FFBF00;
+$secondary-color-B: #35D4A4	;
+
+@mixin button {
+  border: none;
+  background-color: $secondary-color-B;
+  border-radius: 20px;
+  width: 150px;
+  height: 30px;
+  font-weight: bold;
+  margin-top: 10vh ;
+  margin-bottom: 10vh;
+  color: $primary-color;
+}
+
+body {
+  font-family: 'Sniglet', cursive;
+  box-sizing: border-box;
+  background: linear-gradient(to top, $primary-color, $secondary-color-B ) no-repeat;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.game-field {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20vh;
+  width: 300px;
+  height: 300px;
+}
+.cells {
+  background-color: #FFBF00;
+  width: 32%;
+  height: 32%;
+  border: 2px solid $secondary-color-B;
+
+}
+.reset {
+  @include button;
+}
+
