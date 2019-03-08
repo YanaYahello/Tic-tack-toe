@@ -1,7 +1,8 @@
 html {
-  height: 100vh; }
+  height: 100%; }
 
 body {
+  height: 100%;
   font-family: 'Sniglet', cursive;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -19,12 +20,14 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   color: #8F04A8;
-  margin: 1em; }
+  margin: 1em;
+  grid-area: h1; }
 
 h2 {
   font-size: 2em;
   color: #8F04A8;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  grid-area: h2; }
 
 .wrapper {
   grid-area: field;
@@ -48,6 +51,9 @@ h2 {
 .cells {
   background-color: #35D4A4; }
 
+.button-wrapper {
+  grid-area: button; }
+
 .reset {
   border: none;
   background-color: #35D4A4;
@@ -58,7 +64,8 @@ h2 {
   margin-top: 10vh;
   margin-bottom: 10vh;
   color: #8F04A8;
-  cursor: pointer; }
+  cursor: pointer;
+  grid-area: field; }
   .reset:hover {
     background-color: #8F04A8;
     color: #35D4A4; }
@@ -75,5 +82,15 @@ h2 {
   .game-field {
     grid-auto-columns: 100px;
     grid-auto-rows: 100px; } }
+@media screen and (min-width: 412px) and (max-width: 812px) and (orientation: landscape) {
+  .wrapper {
+    display: grid;
+    grid-template-areas: "h1 field" "h2 button";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 65% 20%;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+    grid-gap: 1em; } }
 
 /*# sourceMappingURL=style.css.map */
