@@ -1,36 +1,33 @@
+html {
+  height: 100vh; }
+
 body {
   font-family: 'Sniglet', cursive;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background: -webkit-gradient(linear, left bottom, left top, from(#8F04A8), to(#35D4A4)) no-repeat;
-  height: 100vh; }
+  background: linear-gradient(to top, #8F04A8, #35D4A4) no-repeat; }
 
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  display: grid;
+  grid-template-rows: [row-line1] 60% [row-line2] 40% [row-last-line];
+  grid-template-columns: [col-line1] 1fr [col-line2];
+  justify-items: center; }
+
+.wrapper:last-child {
+  display: grid;
+  justify-items: center; }
 
 .game-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin-top: 20vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 300px;
-  height: 300px; }
+  height: 300px;
+  margin-top: 10vh; }
 
 .cells {
-  width: 32%;
-  height: 32%;
-  border: 2px solid #35D4A4; }
+  border: 3px solid #35D4A4; }
 
 .reset {
   border: none;

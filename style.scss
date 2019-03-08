@@ -14,34 +14,45 @@ $secondary-color-B: #35D4A4	;
   margin-bottom: 10vh;
   color: $primary-color;
 }
-
+html{
+  height: 100vh;
+}
 body {
   font-family: 'Sniglet', cursive;
   box-sizing: border-box;
   background: linear-gradient(to top, $primary-color, $secondary-color-B ) no-repeat;
-  height: 100vh;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  display: grid ;
+  grid-template-rows: [row-line1] 60% [row-line2] 40% [row-last-line] ;
+  grid-template-columns: [col-line1] 1fr [col-line2];
+  justify-items: center;
+}
+.wrapper:last-child{
+  display: grid;
+  justify-items: center;
 }
 .game-field {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 300px;
   height: 300px;
+  margin-top: 10vh;
 }
-.cells {
-  width: 32%;
-  height: 32%;
-  border: 2px solid $secondary-color-B;
+
+.cells{
+  border: 3px solid $secondary-color-B;
 }
 
 .reset {
   @include button;
 }
 
+@media screen and (min-width: 481px) and (max-width: 767px){
+
+}
+@media screen and (min-width: 768px) and (max-width: 1024px){
+
+}
