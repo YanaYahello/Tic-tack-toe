@@ -3,7 +3,6 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background: -webkit-gradient(linear, left bottom, left top, from(#8F04A8), to(#35D4A4)) no-repeat;
-  background: linear-gradient(to top, #8F04A8, #35D4A4) no-repeat;
   height: 100vh; }
 
 .main {
@@ -29,7 +28,6 @@ body {
   height: 300px; }
 
 .cells {
-  background-color: #FFBF00;
   width: 32%;
   height: 32%;
   border: 2px solid #35D4A4; }
