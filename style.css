@@ -41,13 +41,15 @@ h2 {
 
 .game-field {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  min-width: 300px;
-  min-height: 300px;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
   grid-gap: 5px; }
 
 .cells {
-  background-color: #35D4A4; }
+  background-color: #35D4A4;
+  color: #FFBF00;
+  font-size: 4em;
+  padding-top: 15px; }
 
 .button-wrapper {
   grid-area: button; }
@@ -74,8 +76,13 @@ h2 {
     grid-template-rows: 1fr;
     grid-template-columns: repeat(3, 1fr); }
 
+  .game-field {
+    grid-auto-columns: 100px;
+    grid-auto-rows: 100px; }
+
   .h1 {
     font-size: 3em; } }
+/*responsive for landscape orientation*/
 @media screen and (min-width: 412px) and (max-width: 812px) and (orientation: landscape) {
   .wrapper {
     display: grid;
@@ -88,8 +95,13 @@ h2 {
             align-items: start; }
 
   .game-field {
-    min-width: 200px;
-    min-height: 200px;
-    margin-top: 10vh; } }
+    grid-template-columns: repeat(3, 65px);
+    grid-template-rows: repeat(3, 65px);
+    margin-top: 10vh; }
+
+  .cells {
+    font-size: 2em; } }
+.crossZero {
+  color: #FFBF00; }
 
 /*# sourceMappingURL=style.css.map */

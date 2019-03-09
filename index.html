@@ -10,28 +10,28 @@
 <link href="style.css" rel="stylesheet">
 <body>
 <div class="main">
-  <div class="empty1"></div>
-  <div class="wrapper">
-    <h1>Tic-tac-toe</h1>
-    <h2>Player:<span></span></h2>
-  <div class="game-field">
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
-    <div class="cells"></div>
+    <div class="empty1"></div>
+    <div class="wrapper">
+        <h1>Tic-tac-toe</h1>
+        <h2>Player: <span id="message"></span></h2>
+        <div id="game-field" class="game-field">
+            <div data-cell="1" class="cells"></div>
+            <div data-cell="2" class="cells"></div>
+            <div data-cell="3" class="cells"></div>
+            <div data-cell="4" class="cells"></div>
+            <div data-cell="5" class="cells"></div>
+            <div data-cell="6" class="cells"></div>
+            <div data-cell="7" class="cells"></div>
+            <div data-cell="8" class="cells"></div>
+            <div data-cell="9" class="cells"></div>
+        </div>
+        <div class="button-wrapper">
+            <button id="reset" class="reset">RESET</button>
+        </div>
     </div>
-  <div class="button-wrapper">
-  <button class="reset">RESET</button>
-  </div>
-    </div>
-  <div class="empty2"></div>
+    <div class="empty2"></div>
 </div>
 
-<script src="script.js"></script>
+<script src="mainJs.js"></script>
 </body>
 </html>
