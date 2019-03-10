@@ -65,8 +65,8 @@ h2 {
 
 .game-field {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
   grid-gap: 5px;
 }
 
@@ -95,7 +95,7 @@ h2 {
 
 //responsive for tablets and desktop
 
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 812px) {
   .main {
     grid-template-areas: "empty1 field empty2";
     grid-template-rows: 1fr;
@@ -113,24 +113,29 @@ h2 {
 
 /*responsive for landscape orientation*/
 
-@media screen and (min-width: 412px) and (max-width: 812px) and (orientation: landscape) {
+@media screen and (min-width: 320px) and (max-width: 812px) and (orientation: landscape) {
   .wrapper {
     display: grid;
     grid-template-areas: "h1 field" "h2 button";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 65% 1fr;
     grid-gap: 1em;
-    align-items: start;
+    align-items: center;
   }
   .game-field {
     grid-template-columns: repeat(3, 65px);
     grid-template-rows: repeat(3, 65px);
     margin-top: 10vh;
   }
+  .reset{
+    margin-right: 10px;
+  }
+
   .cells {
     font-size: 2em;
   }
 }
-.crossZero{
-  color: $secondary-color-A;
+
+.winner {
+  color: red;
 }

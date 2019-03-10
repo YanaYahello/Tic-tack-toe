@@ -16,68 +16,67 @@ var cells = document.getElementsByClassName('cells'),
     dataX = [],
     dataO = [];
 
-//add event listener to every cell переписать через форич
-for (var cell = 0; cell < cells.length; cell++) {
+
+// add event listener to every cell переписать через форич
+for (let cell = 0; cell < cells.length; cell++) {
     cells[cell].addEventListener('click', currentStep);
 }
 
-//
 function currentStep() {
-    var numberOfCell = +this.getAttribute('data-cell');
-    //проверяем или в ячейке есть текст если нет то текущее значение бдет player
+    let numberOfCell = +this.getAttribute('data-cell');
+    //check cell's content if no content => player
     if (!this.textContent) {
         this.innerText = player;
         //after adding value in cell check this value and made arrays with data X or O
         player === 'X' ? dataX.push(numberOfCell) : dataO.push(numberOfCell);
-        //cмассив будет передаватся в функцию checkWin для определения выйграшной комбинации
+        //array is passed on function checkWin
         if(
             (dataX.length > 2 || dataO.length > 2) &&
             (checkWin(dataO, numberOfCell) || checkWin(dataX, numberOfCell))
         ){
-            for (var cell = 0; cell < cells.length; cell++) {
+            for (let cell = 0; cell < cells.length; cell++) {
                 cells[cell].removeEventListener('click', currentStep);
             }
-            return (message.innerText = player + 'has won');
+            return (message.innerText = player + ' '+'has won');
         }
-        changePlayer();
+            //change player
+        player === 'X' ? (player = 'O') : (player = 'X');
         step++;
         //show message about player's step
         step === 9 ? message.innerText = 'standoff' : message.innerText = player;
     }
 }
 
-function changePlayer() {
-    player === 'X' ? (player = 'O') : (player = 'X');
-}
 
-//clear field and arrays with data переписать через форич
+
+//clear field and arrays with data
 resetButton.addEventListener('click', function () {
-    for (var i = 0; i < cells.length; i++) {
-        cells[i].innerText = '';
+    for ( let cell = 0; cell < cells.length; cell++) {
+        cells[cell].innerText = '';
     }
     dataX =[];
     dataO =[];
     player = 'X';
     step = 0;
     message.innerText = player;
-    for (var cell = 0; cell < cells.length; cell++) {
+    for (let cell = 0; cell < cells.length; cell++) {
         cells[cell].addEventListener('click', currentStep);
     }
 });
-//who win
+// winning combination calculation
 function checkWin(arr,num) {
-    //foreach
-    for( var j = 0; j < winCombinations.length; j++ ){
-        var someWinArr = winCombinations[j];
-        var count = 0;
-        //проверяем масив из массива , в масиве ищим переданое число
+    for( let arrays = 0; arrays < winCombinations.length; arrays++ ){
+        let someWinArr = winCombinations[arrays];
+        let count = 0;
+        //sort out arrays from winCombinations by first value
         if(someWinArr.indexOf(num)!== -1){
-            //проходим по всем переменнім в вібраном нами масиву
-            for( var k = 0; k < someWinArr.length; k++ ){
-                //сравниванием выбраные массивы с тем котрый передали в функцию
-                if(arr.indexOf(someWinArr[k])!== -1){
+            //look through sorted arrays
+            for( let win = 0; win < someWinArr.length; win++ ){
+                //comparing sorted arrays with arrays which get from the currentStep function
+                if(arr.indexOf(someWinArr[win])!== -1){
                     count ++;
                     if(count === 3){
+
                         return true;
                     }
                 }
@@ -85,4 +84,16 @@ function checkWin(arr,num) {
             count = 0;
         }
     }
+}
+
+// canvas
+function canvas() {
+    let canvas = document.getElementById('c1');
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.moveTo(0 ,0);
+    ctx.lineTo(50,50);
+    ctx.stroke();
+
 }
