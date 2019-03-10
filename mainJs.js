@@ -76,6 +76,12 @@ function checkWin(arr,num) {
                 if(arr.indexOf(someWinArr[win])!== -1){
                     count ++;
                     if(count === 3){
+                        let attArr = [];
+                        let elements;
+                        for ( let cell = 0; cell < cells.length; cell++) {
+                            elements = cells[cell].getAttribute('data-cell');
+                            attArr.push(elements);
+                        }
 
                         return true;
                     }
@@ -87,13 +93,13 @@ function checkWin(arr,num) {
 }
 
 // canvas
-function canvas() {
-    let canvas = document.getElementById('c1');
-    let ctx = canvas.getContext('2d');
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 3;
-    ctx.moveTo(0 ,0);
-    ctx.lineTo(50,50);
-    ctx.stroke();
-
-}
+// function canvas() {
+//     let canvas = document.getElementById('c1');
+//     let ctx = canvas.getContext('2d');
+//     ctx.strokeStyle = "red";
+//     ctx.lineWidth = 3;
+//     ctx.moveTo(0 ,0);
+//     ctx.lineTo(50,50);
+//     ctx.stroke();
+//
+// }

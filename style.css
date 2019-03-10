@@ -21,7 +21,9 @@ h1 {
   font-weight: bold;
   color: #8F04A8;
   margin: 1em;
-  grid-area: h1; }
+  grid-area: h1;
+  -webkit-animation: header 3s ease;
+          animation: header 3s ease; }
 
 h2 {
   font-size: 2em;
@@ -43,7 +45,9 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
-  grid-gap: 5px; }
+  grid-gap: 5px;
+  -webkit-animation: fieldAmine 500ms;
+          animation: fieldAmine 500ms; }
 
 .cells {
   background-color: #35D4A4;
@@ -104,6 +108,32 @@ h2 {
 
   .cells {
     font-size: 2em; } }
+@-webkit-keyframes header {
+  from {
+    opacity: 0;
+    margin-top: 0; }
+  to {
+    opacity: 1; } }
+@keyframes header {
+  from {
+    opacity: 0;
+    margin-top: 0; }
+  to {
+    opacity: 1; } }
+@-webkit-keyframes fieldAmine {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); } }
+@keyframes fieldAmine {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); } }
 .winner {
   color: red; }
 

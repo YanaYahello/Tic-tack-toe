@@ -40,6 +40,7 @@ h1 {
   color: $primary-color;
   margin: 1em;
   grid-area: h1;
+  animation: header 3s ease;
 }
 
 h2 {
@@ -68,6 +69,7 @@ h2 {
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
   grid-gap: 5px;
+  animation: fieldAmine 500ms ;
 }
 
 .cells {
@@ -135,7 +137,20 @@ h2 {
     font-size: 2em;
   }
 }
-
+//animation
+@keyframes header {
+  from{opacity: 0;
+  margin-top: 0}
+  to{opacity: 1}
+}
+@keyframes fieldAmine {
+  from{
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
 .winner {
   color: red;
 }
