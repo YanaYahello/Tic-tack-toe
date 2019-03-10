@@ -22,8 +22,8 @@ h1 {
   color: #8F04A8;
   margin: 1em;
   grid-area: h1;
-  -webkit-animation: header 3s ease;
-          animation: header 3s ease; }
+  -webkit-animation: header 2s ease;
+          animation: header 2s ease; }
 
 h2 {
   font-size: 2em;
@@ -69,6 +69,8 @@ h2 {
   margin-bottom: 10vh;
   color: #8F04A8;
   cursor: pointer;
+  -webkit-animation: header 2s ease;
+          animation: header 2s ease;
   grid-area: field; }
   .reset:hover {
     background-color: #8F04A8;
@@ -110,14 +112,12 @@ h2 {
     font-size: 2em; } }
 @-webkit-keyframes header {
   from {
-    opacity: 0;
-    margin-top: 0; }
+    opacity: 0; }
   to {
     opacity: 1; } }
 @keyframes header {
   from {
-    opacity: 0;
-    margin-top: 0; }
+    opacity: 0; }
   to {
     opacity: 1; } }
 @-webkit-keyframes fieldAmine {

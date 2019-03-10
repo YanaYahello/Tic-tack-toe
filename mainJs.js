@@ -30,16 +30,16 @@ function currentStep() {
         //after adding value in cell check this value and made arrays with data X or O
         player === 'X' ? dataX.push(numberOfCell) : dataO.push(numberOfCell);
         //array is passed on function checkWin
-        if(
+        if (
             (dataX.length > 2 || dataO.length > 2) &&
             (checkWin(dataO, numberOfCell) || checkWin(dataX, numberOfCell))
-        ){
+        ) {
             for (let cell = 0; cell < cells.length; cell++) {
                 cells[cell].removeEventListener('click', currentStep);
             }
-            return (message.innerText = player + ' '+'has won');
+            return (message.innerText = player + ' ' + 'has won');
         }
-            //change player
+        //change player
         player === 'X' ? (player = 'O') : (player = 'X');
         step++;
         //show message about player's step
@@ -48,49 +48,55 @@ function currentStep() {
 }
 
 
-
 //clear field and arrays with data
 resetButton.addEventListener('click', function () {
-    for ( let cell = 0; cell < cells.length; cell++) {
+    for (let cell = 0; cell < cells.length; cell++) {
         cells[cell].innerText = '';
     }
-    dataX =[];
-    dataO =[];
+    dataX = [];
+    dataO = [];
     player = 'X';
     step = 0;
     message.innerText = player;
     for (let cell = 0; cell < cells.length; cell++) {
         cells[cell].addEventListener('click', currentStep);
+        cells[cell].classList.remove('winner');
     }
 });
+
 // winning combination calculation
-function checkWin(arr,num) {
-    for( let arrays = 0; arrays < winCombinations.length; arrays++ ){
+function checkWin(arr, num) {
+    for (let arrays = 0; arrays < winCombinations.length; arrays++) {
         let someWinArr = winCombinations[arrays];
         let count = 0;
         //sort out arrays from winCombinations by first value
-        if(someWinArr.indexOf(num)!== -1){
+        if (someWinArr.indexOf(num) !== -1) {
             //look through sorted arrays
-            for( let win = 0; win < someWinArr.length; win++ ){
-                //comparing sorted arrays with arrays which get from the currentStep function
-                if(arr.indexOf(someWinArr[win])!== -1){
-                    count ++;
-                    if(count === 3){
-                        let attArr = [];
-                        let elements;
-                        for ( let cell = 0; cell < cells.length; cell++) {
-                            elements = cells[cell].getAttribute('data-cell');
-                            attArr.push(elements);
+            for (let win = 0; win < someWinArr.length; win++) {
+                //comparing sorted arrays with arrays which has got from the currentStep function
+                if (arr.indexOf(someWinArr[win]) !== -1) {
+                    count++;
+                    if (count === 3) {
+                        //add class for winner combination
+                        for (let cell = 0; cell < cells.length; cell++) {
+                            let attr = cells[cell].attributes;
+                            for (let j = 0; j < attr.length; j++) {
+                                if (+attr[j].value === someWinArr[0] || +attr[j].value === someWinArr[1] || +attr[j].value === someWinArr[2]) {
+                                    cells[cell].classList.add('winner');
+                                }
+                            }
                         }
 
                         return true;
                     }
                 }
             }
-            count = 0;
         }
+        count = 0;
     }
+
 }
+
 
 // canvas
 // function canvas() {
