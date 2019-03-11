@@ -71,6 +71,7 @@ h2 {
   grid-template-rows: repeat(3, 80px);
   grid-gap: 5px;
   animation: fieldAmine 500ms ;
+  position: relative;
 }
 
 .cells {
@@ -151,6 +152,16 @@ h2 {
     transform: rotate(180deg);
   }
 }
+
 .winner {
-  color:red;
+  color: $primary-color;
 }
+canvas {
+  width: 250px;
+  height: 250px;
+  border: 1px solid black;
+  z-index: -3;
+  position: absolute;
+
+}
+

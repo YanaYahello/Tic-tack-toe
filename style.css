@@ -47,7 +47,8 @@ h2 {
   grid-template-rows: repeat(3, 80px);
   grid-gap: 5px;
   -webkit-animation: fieldAmine 500ms;
-          animation: fieldAmine 500ms; }
+          animation: fieldAmine 500ms;
+  position: relative; }
 
 .cells {
   background-color: #35D4A4;
@@ -135,6 +136,13 @@ h2 {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); } }
 .winner {
-  color: red; }
+  color: #8F04A8; }
+
+canvas {
+  width: 250px;
+  height: 250px;
+  border: 1px solid black;
+  z-index: -3;
+  position: absolute; }
 
 /*# sourceMappingURL=style.css.map */
