@@ -65,7 +65,8 @@ resetButton.addEventListener('click', function () {
         cells[cell].addEventListener('click', currentStep);
         cells[cell].classList.remove('winner');
     }
-
+    //remove canvas
+     removeCanvas();
 });
 
 // winning combination calculation
@@ -82,50 +83,51 @@ function checkWin(arr, num) {
                     count++;
                     if (count === 3) {
                         // add class for winner combination
-                        for (let cell = 0; cell < cells.length; cell++) {
-                            let attr = cells[cell].attributes;
-                            for (let someAttr = 0; someAttr < attr.length; someAttr++) {
-                                if (+attr[someAttr].value === someWinArr[0] || +attr[someAttr].value === someWinArr[1] || +attr[someAttr].value === someWinArr[2]) {
-                                    cells[cell].classList.add('winner');
-
-                                }
-                            }
-                        }
+                        // for (let cell = 0; cell < cells.length; cell++) {
+                        //     let attr = cells[cell].attributes;
+                        //     for (let someAttr = 0; someAttr < attr.length; someAttr++) {
+                        //         if (+attr[someAttr].value === someWinArr[0] || +attr[someAttr].value === someWinArr[1] || +attr[someAttr].value === someWinArr[2]) {
+                        //             cells[cell].classList.add('winner');
+                        //
+                        //         }
+                        //     }
+                        // }
                         //add line by canvas
-                        // if (someWinArr[0] === 1 || someWinArr[2] === 5 || someWinArr[0] === 9) {
-                        //     line1();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 1 || someWinArr[2] === 2 || someWinArr[0] === 3) {
-                        //     line2();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 1 || someWinArr[2] === 4 || someWinArr[0] === 7) {
-                        //     line3();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 2 || someWinArr[2] === 5 || someWinArr[0] === 8) {
-                        //     line4();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 4 || someWinArr[2] === 5 || someWinArr[0] === 6) {
-                        //     line5();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 3 || someWinArr[2] === 6 || someWinArr[0] === 9) {
-                        //     line6();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 3 || someWinArr[2] === 5 || someWinArr[0] === 7) {
-                        //     line7();
-                        //     return true;
-                        // }
-                        // if (someWinArr[0] === 7 || someWinArr[2] === 8 || someWinArr[0] === 9) {
-                        //     line8();
-                        //     return true;
-                        // }
+                        if (someWinArr[0] === 1 || someWinArr[1] === 5 || someWinArr[2] === 9) {
+                            line1();
+                            return true;
+                        }
 
-                        return true;
+                        if (someWinArr[0] === 1 || someWinArr[1] === 2 || someWinArr[2] === 3) {
+                            line2();
+                            return true;}
+
+                        if (someWinArr[0] === 1 || someWinArr[1] === 4 || someWinArr[2] === 7) {
+                            line3();
+                            return true;
+                        }
+                        if (someWinArr[0] === 2 || someWinArr[1] === 5 || someWinArr[2] === 8) {
+                            line4();
+                            return true;
+                        }
+                        if (someWinArr[0] === 4 || someWinArr[1] === 5 || someWinArr[2] === 6) {
+                            line5();
+                            return true;
+                        }
+                        if (someWinArr[0] === 3 || someWinArr[1] === 6 || someWinArr[2] === 9) {
+                            line6();
+                            return true;
+                        }
+                        if (someWinArr[0] === 3 || someWinArr[1] === 5 || someWinArr[2] === 7) {
+                            line7();
+                            return true;
+                        }
+                        if (someWinArr[0] === 7 || someWinArr[1] === 8 || someWinArr[2] === 9) {
+                            line8();
+                            return true;
+                        }
+
+                        // return true;
                     }
                 }
             }
@@ -134,73 +136,107 @@ function checkWin(arr, num) {
     }
 
 }
-//winner lines
-// let canvas = document.getElementById('c1');
-// let ctx = canvas.getContext('2d');
-//
-// function line1() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(0, 0);
-//     ctx.lineTo(250, 250);
-//     ctx.stroke();
-// }
-//
-// function line3() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(15, 0);
-//     ctx.lineTo(15, 250);
-//     ctx.stroke();
-// }
-//
-// function line4() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(50, 0);
-//     ctx.lineTo(50, 250);
-//     ctx.stroke();
-// }
-//
-// function line2() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(0, 15);
-//     ctx.lineTo(250, 15);
-//     ctx.stroke();
-// }
-//
-// function line5() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(0, 50);
-//     ctx.lineTo(250, 50);
-//     ctx.stroke();
-// }
-//
-// function line6() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(85, 0);
-//     ctx.lineTo(85, 250);
-//     ctx.stroke();
-// }
-//
-// function line7() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(100, 0);
-//     ctx.lineTo(0, 100);
-//     ctx.stroke();
-// }
-//
-// function line8() {
-//     ctx.strokeStyle = 'red';
-//     ctx.lineWidth = '3';
-//     ctx.moveTo(0, 85);
-//     ctx.lineTo(250, 85);
-//     ctx.stroke();
-// }
+
+//add canvas in html
+let field = document.getElementById('game-field');
+let canvas = document.createElement('canvas');
+canvas.setAttribute('width','250');
+canvas.setAttribute('height','250');
+
+
+//remove
+function removeCanvas() {
+    field.removeChild(canvas);
+}
+// drawing winning lines
+function line1() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 0);
+    ctx.lineTo(250, 250);
+    ctx.stroke();
+
+}
+
+function line3() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(15, 0);
+    ctx.lineTo(15, 250);
+    ctx.stroke();
+}
+
+function line4() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(125, 0);
+    ctx.lineTo(125,250);
+    ctx.stroke();
+}
+
+function line2() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 50);
+    ctx.lineTo(250, 50);
+    ctx.stroke();
+}
+
+function line5() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 50);
+    ctx.lineTo(250, 50);
+    ctx.stroke();
+}
+
+function line6() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(200, 0);
+    ctx.lineTo(200, 250);
+    ctx.stroke();
+}
+
+function line7() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(100, 0);
+    ctx.lineTo(0, 100);
+    ctx.stroke();
+}
+
+function line8() {
+    canvas.className = 'c1';
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 85);
+    ctx.lineTo(250, 85);
+    ctx.stroke();
+}
 
 
 

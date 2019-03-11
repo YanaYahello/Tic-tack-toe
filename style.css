@@ -142,7 +142,7 @@ canvas {
   width: 250px;
   height: 250px;
   border: 1px solid black;
-  z-index: -3;
+  z-index: 3;
   position: absolute; }
 
 /*# sourceMappingURL=style.css.map */
