@@ -43,8 +43,8 @@ h2 {
 
 .game-field {
   display: grid;
-  grid-template-columns: repeat(3, 80px);
-  grid-template-rows: repeat(3, 80px);
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
   grid-gap: 5px;
   -webkit-animation: fieldAmine 500ms;
           animation: fieldAmine 500ms;
@@ -53,7 +53,7 @@ h2 {
 .cells {
   background-color: #35D4A4;
   color: #FFBF00;
-  font-size: 4em;
+  font-size: 2em;
   padding-top: 15px; }
 
 .button-wrapper {
@@ -139,8 +139,8 @@ h2 {
   color: #8F04A8; }
 
 canvas {
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   border: 1px solid black;
   z-index: 3;
   position: absolute; }

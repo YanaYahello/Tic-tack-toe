@@ -67,8 +67,8 @@ h2 {
 
 .game-field {
   display: grid;
-  grid-template-columns: repeat(3, 80px);
-  grid-template-rows: repeat(3, 80px);
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
   grid-gap: 5px;
   animation: fieldAmine 500ms ;
   position: relative;
@@ -77,9 +77,8 @@ h2 {
 .cells {
   background-color: $secondary-color-B;
   color: $secondary-color-A;
-  font-size: 4em;
+  font-size: 2em;
   padding-top: 15px;
-
 }
 
 .button-wrapper {
@@ -156,12 +155,11 @@ h2 {
 .winner {
   color: $primary-color;
 }
+
 canvas {
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   border: 1px solid black;
   z-index: 3;
   position: absolute;
-
 }
-

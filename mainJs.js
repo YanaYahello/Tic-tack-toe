@@ -1,55 +1,54 @@
 'use strict';
+
 let cells = document.getElementsByClassName('cells'),
+    gameField = document.getElementById('game'),
     resetButton = document.getElementById('reset'),
     step = 0,
     player = 'X',
     message = document.getElementById('message'),
     dataX = [],
-    dataO = [];
+    dataO = []
+let field = document.getElementById('game');
+let canvas = document.createElement('canvas');
 
 
-const winCombinations = [
-    [1, 2, 3],
-    [1, 4, 7],
-    [1, 5, 9],
-    [2, 5, 8],
-    [3, 5, 7],
-    [3, 6, 9],
-    [4, 5, 6],
-    [7, 8, 9]
-];
+const winArr = ["01234", "56789", "1011121314", "1516171819", "2021222324",
+    "05101520", "16111621", "27121722", "38131823", "49141924", "06121824", "48121620"];
 
 
-// add event listener to every cell
-for (let cell = 0; cell < cells.length; cell++) {
-    cells[cell].addEventListener('click', currentStep);
+message.innerText = player;
+
+
+//create elements
+
+for (let num = 0; num < 25; num++) {
+    gameField.innerHTML += `<div class="cells" data-cell="${num}"></div>`;
 }
+// defining of element on what we click
+gameField.addEventListener('click', eventBlock);
 
-function currentStep() {
-    let numberOfCell = +this.getAttribute('data-cell');
-    //check cell's content if no content => player =X;
-    if (!this.textContent) {
-        this.innerText = player;
-        //after adding value in cell check this value and made arrays with data X or O
-        player === 'X' ? dataX.push(numberOfCell) : dataO.push(numberOfCell);
-        //array is passed on function checkWin
-        if (
-            (dataX.length > 2 || dataO.length > 2) &&
-            (checkWin(dataO, numberOfCell) || checkWin(dataX, numberOfCell))
-        ) {
-            for (let cell = 0; cell < cells.length; cell++) {
-                cells[cell].removeEventListener('click', currentStep);
-            }
+function eventBlock(event) {
+    let targetBlock = event.target;
+    let num = +targetBlock.getAttribute('data-cell');
+    if (!targetBlock.textContent) {
+        targetBlock.innerHTML = player;
+        //create two arrays
+        player === 'X' ? dataX.push(num) : dataO.push(num);
+        if ((dataX.length > 4 || dataO.length > 4) &&
+            (checkWin(dataO) || checkWin(dataX))) {
+            gameField.removeEventListener('click', eventBlock);
             return (message.innerText = player + ' ' + 'has won');
         }
-        //change player
-        player === 'X' ? (player = 'O') : (player = 'X');
         step++;
-        //show message about player's step
-        step === 9 ? message.innerText = 'standoff' : message.innerText = player;
+        changePlayer();
     }
+    //show message about player's step
+    step === 25 ? message.innerText = 'standoff' : message.innerText = player;
 }
 
+function changePlayer() {
+    player === 'X' ? (player = 'O') : (player = 'X');
+}
 
 //clear field and arrays with data
 resetButton.addEventListener('click', function () {
@@ -61,180 +60,242 @@ resetButton.addEventListener('click', function () {
     player = 'X';
     step = 0;
     message.innerText = player;
-    for (let cell = 0; cell < cells.length; cell++) {
-        cells[cell].addEventListener('click', currentStep);
-        cells[cell].classList.remove('winner');
-    }
-    //remove canvas
-     removeCanvas();
+    removeCanvas();
+    gameField.addEventListener('click', eventBlock);
+
 });
 
-// winning combination calculation
-function checkWin(arr, num) {
-    for (let arrays = 0; arrays < winCombinations.length; arrays++) {
-        let someWinArr = winCombinations[arrays];
-        let count = 0;
-        //sort out arrays from winCombinations by first value
-        if (someWinArr.indexOf(num) !== -1) {
-            //look through sorted arrays
-            for (let win = 0; win < someWinArr.length; win++) {
-                //comparing sorted arrays with arrays which we has got from the currentStep function
-                if (arr.indexOf(someWinArr[win]) !== -1) {
-                    count++;
-                    if (count === 3) {
-                        // add class for winner combination
-                        // for (let cell = 0; cell < cells.length; cell++) {
-                        //     let attr = cells[cell].attributes;
-                        //     for (let someAttr = 0; someAttr < attr.length; someAttr++) {
-                        //         if (+attr[someAttr].value === someWinArr[0] || +attr[someAttr].value === someWinArr[1] || +attr[someAttr].value === someWinArr[2]) {
-                        //             cells[cell].classList.add('winner');
-                        //
-                        //         }
-                        //     }
-                        // }
-                        //add line by canvas
-                        if (someWinArr[0] === 1 || someWinArr[1] === 5 || someWinArr[2] === 9) {
-                            line1();
-                            return true;
-                        }
-
-                        if (someWinArr[0] === 1 || someWinArr[1] === 2 || someWinArr[2] === 3) {
-                            line2();
-                            return true;}
-
-                        if (someWinArr[0] === 1 || someWinArr[1] === 4 || someWinArr[2] === 7) {
-                            line3();
-                            return true;
-                        }
-                        if (someWinArr[0] === 2 || someWinArr[1] === 5 || someWinArr[2] === 8) {
-                            line4();
-                            return true;
-                        }
-                        if (someWinArr[0] === 4 || someWinArr[1] === 5 || someWinArr[2] === 6) {
-                            line5();
-                            return true;
-                        }
-                        if (someWinArr[0] === 3 || someWinArr[1] === 6 || someWinArr[2] === 9) {
-                            line6();
-                            return true;
-                        }
-                        if (someWinArr[0] === 3 || someWinArr[1] === 5 || someWinArr[2] === 7) {
-                            line7();
-                            return true;
-                        }
-                        if (someWinArr[0] === 7 || someWinArr[1] === 8 || someWinArr[2] === 9) {
-                            line8();
-                            return true;
-                        }
-
-                        // return true;
-                    }
-                }
-            }
+function checkWin(arr) {
+    let winStrings = arr.join('');
+    let winIndex = winArr.indexOf(winStrings);
+    let winner;
+    if (winIndex !== -1) {
+        for (let index = 0; index < winArr.length; index++) {
+            winner = winArr[winIndex];
         }
-        count = 0;
+        if (winner === winArr[0]) {
+            line2();
+            return true;
+        }
+        if (winner === winArr[10]) {
+            line1();
+            return true;
+        }
+        if (winner === winArr[1]) {
+            line5();
+            return true;
+        }
+        if (winner === winArr[2]) {
+            line8();
+            return true;
+        }
+        if (winner === winArr[3]) {
+            line9();
+            return true;
+        }
+        if (winner === winArr[4]) {
+            line10();
+            return true;
+        }
+        if (winner === winArr[5]) {
+            line3();
+            return true;
+        }
+        if (winner === winArr[6]) {
+            line4();
+            return true;
+        }
+        if (winner === winArr[7]) {
+            line11();
+            return true;
+        }
+        if (winner === winArr[8]) {
+            line6();
+            return true;
+        }
+        if (winner === winArr[9]) {
+            line12();
+            return true;
+        }
+        if (winner === winArr[11]) {
+            line7();
+            return true;
+        }
+        // return true;
     }
-
 }
 
-//add canvas in html
-let field = document.getElementById('game-field');
-let canvas = document.createElement('canvas');
-canvas.setAttribute('width','250');
-canvas.setAttribute('height','250');
-
-
-//remove
+//remove canvas
 function removeCanvas() {
     field.removeChild(canvas);
 }
+
 // drawing winning lines
 function line1() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
     ctx.moveTo(0, 0);
-    ctx.lineTo(250, 250);
-    ctx.stroke();
-
-}
-
-function line3() {
-    canvas.className = 'c1';
-    field.insertBefore(canvas, field.children[0]);
-    let ctx = canvas.getContext('2d');
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = '3';
-    ctx.moveTo(15, 0);
-    ctx.lineTo(15, 250);
-    ctx.stroke();
-}
-
-function line4() {
-    canvas.className = 'c1';
-    field.insertBefore(canvas, field.children[0]);
-    let ctx = canvas.getContext('2d');
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = '3';
-    ctx.moveTo(125, 0);
-    ctx.lineTo(125,250);
+    ctx.lineTo(300, 300);
     ctx.stroke();
 }
 
 function line2() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
-    ctx.moveTo(0, 50);
-    ctx.lineTo(250, 50);
+    ctx.moveTo(0, 30);
+    ctx.lineTo(300, 30);
+    ctx.stroke();
+}
+
+function line3() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(30, 0);
+    ctx.lineTo(30, 300);
+    ctx.stroke();
+}
+
+function line4() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(90, 0);
+    ctx.lineTo(90, 300);
     ctx.stroke();
 }
 
 function line5() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
-    ctx.moveTo(0, 50);
-    ctx.lineTo(250, 50);
+    ctx.moveTo(0, 90);
+    ctx.lineTo(300, 90);
     ctx.stroke();
 }
 
 function line6() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
-    ctx.moveTo(200, 0);
-    ctx.lineTo(200, 250);
+    ctx.moveTo(215, 0);
+    ctx.lineTo(215, 300);
     ctx.stroke();
 }
 
 function line7() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
-    ctx.moveTo(100, 0);
-    ctx.lineTo(0, 100);
+    ctx.moveTo(300, 0);
+    ctx.lineTo(0, 300);
     ctx.stroke();
 }
 
 function line8() {
     canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
     field.insertBefore(canvas, field.children[0]);
     let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = '3';
-    ctx.moveTo(0, 85);
-    ctx.lineTo(250, 85);
+    ctx.moveTo(0, 150);
+    ctx.lineTo(300, 150);
+    ctx.stroke();
+}
+
+function line9() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 215);
+    ctx.lineTo(300, 215);
+    ctx.stroke();
+}
+
+function line10() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(0, 275);
+    ctx.lineTo(300, 275);
+    ctx.stroke();
+}
+
+function line11() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(150, 0);
+    ctx.lineTo(150, 300);
+    ctx.stroke();
+}
+
+function line12() {
+    canvas.className = 'c1';
+    canvas.setAttribute('width', '300');
+    canvas.setAttribute('height', '300');
+    field.insertBefore(canvas, field.children[0]);
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 250, 250);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = '3';
+    ctx.moveTo(275, 0);
+    ctx.lineTo(275, 300);
     ctx.stroke();
 }
 
