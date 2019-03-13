@@ -12,8 +12,8 @@ let cells = document.getElementsByClassName('cells'),
     canvas = document.createElement('canvas');
 
 
-const winArr = ["01234", "56789", "1011121314", "1516171819", "2021222324",
-    "05101520", "16111621", "27121722", "38131823", "49141924", "06121824", "48121620"];
+const winArr = ["01234", "56789", "0111111234", "1111156789", "0122222234",
+    "00011255", "11111266", "11222277", "11233388", "11244499", "01122468", "01122468"];
 
 
 message.innerText = player;
@@ -67,7 +67,9 @@ resetButton.addEventListener('click', function () {
 
 function checkWin(arr) {
     let someStrings = arr.join('');
-    let winIndex = winArr.indexOf(someStrings);
+    let sortedString = someStrings.split('').sort().join('');
+    console.log(sortedString);
+    let winIndex = winArr.indexOf(sortedString);
     let winner;
     if (winIndex !== -1) {
         for (let index = 0; index < winArr.length; index++) {
