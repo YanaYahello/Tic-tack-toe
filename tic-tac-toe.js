@@ -7,9 +7,9 @@ let cells = document.getElementsByClassName('cells'),
     player = 'X',
     message = document.getElementById('message'),
     dataX = [],
-    dataO = []
-let field = document.getElementById('game');
-let canvas = document.createElement('canvas');
+    dataO = [],
+    field = document.getElementById('game'),
+    canvas = document.createElement('canvas');
 
 
 const winArr = ["01234", "56789", "1011121314", "1516171819", "2021222324",
@@ -66,8 +66,8 @@ resetButton.addEventListener('click', function () {
 });
 
 function checkWin(arr) {
-    let winStrings = arr.join('');
-    let winIndex = winArr.indexOf(winStrings);
+    let someStrings = arr.join('');
+    let winIndex = winArr.indexOf(someStrings);
     let winner;
     if (winIndex !== -1) {
         for (let index = 0; index < winArr.length; index++) {

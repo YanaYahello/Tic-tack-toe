@@ -135,13 +135,9 @@ h2 {
   to {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); } }
-.winner {
-  color: #8F04A8; }
-
 canvas {
   width: 270px;
   height: 270px;
-  border: 1px solid black;
   z-index: 3;
   position: absolute; }
 

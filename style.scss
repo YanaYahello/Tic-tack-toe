@@ -152,14 +152,10 @@ h2 {
   }
 }
 
-.winner {
-  color: $primary-color;
-}
 
 canvas {
   width: 270px;
   height: 270px;
-  border: 1px solid black;
   z-index: 3;
   position: absolute;
 }
